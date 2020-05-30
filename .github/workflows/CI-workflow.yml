@@ -1,0 +1,27 @@
+# name of workflow
+name: Deploy Website
+
+# Run this  action on which event/events
+on: [push]
+
+# what to do when this action is triggered 
+jobs:
+  # job purpose: build our index page
+  build:
+    # which VM to run it
+    runs-on: ubuntu-latest
+    name: Deploying to surge
+    # set of instruction that actually build and test our code
+    steps:
+      # bring your code to VM 
+      - uses: actions/checkout@v2
+      # to run comands and dependencies install node.js on VM
+      - name: Install Node.js
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: 12
+      - name: Install Surge
+        run: npm install -g surge
+      - name: Run surge
+        # provide domian name from surge
+        run: surge ./ http://scrawny-dinner.surge.sh --token ${{ secrets.SURGE_TOKEN }}
