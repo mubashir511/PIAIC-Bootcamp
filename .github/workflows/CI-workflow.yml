@@ -24,4 +24,4 @@ jobs:
         run: npm install -g surge
       - name: Run surge
         # provide domian name from surge
-        run: surge ./ http://scrawny-dinner.surge.sh --token ${{ secrets.SURGE_TOKEN }}
+        run: surge ./ https://hapless-stomach.surge.sh --token ${{ secrets.SURGE_TOKEN }}
